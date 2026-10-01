@@ -16,9 +16,25 @@ export function Hero({ profile }: HeroProps) {
         connected={ true }
         connectionDistance={ 50 }
       />
-      <img src={ profile.avatar } alt={ profile.name } className={ styles.avatar }/>
-      <h1 className={ styles.title }>{ profile.name }</h1>
-      <p className={ styles.role }>{ profile.role }</p>
+      <div className={styles.avatar_container}>
+        <img
+          src={ profile.avatar }
+          alt={ profile.name }
+          className={ styles.avatar_container__avatar }
+        />
+      </div>
+
+      <div className={ styles.content_container }>
+        <span className={ styles.content_container__eyebrow }>
+          PIETER SWILLENS | BACKEND
+        </span>
+        <h1 className={ styles.content_container__title }>
+          <span>SOFTWARE</span> <span className={ styles.content_container__titleAccent }>DEV.</span>
+        </h1>
+        <div className={ styles.content_container__subtitle }>
+          <span/> Building on principles, not shortcuts.
+        </div>
+      </div>
     </section>
   )
 }
