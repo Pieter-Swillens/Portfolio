@@ -1,0 +1,64 @@
+:root {
+    color-scheme: light dark;
+
+    /* KLEUREN: light-dark(licht, donker) */
+    --color-bg: light-dark(#fafafa, #0f1115);
+    --color-surface: light-dark(#ffffff, #171a21);
+    --color-text: light-dark(#0a2a20, #e8f2ec);
+    --color-text-muted: light-dark(#3f5f54, #9fc0b1);
+    --color-border: light-dark(#c5d6cb, #1d4f3f);
+    --color-accent: light-dark(#0b6b4d, #e6b84c);
+    --color-action: #e6b84c;
+    --color-action-hover: color-mix(in srgb, var(--color-action), white 25%);
+    --color-on-action: #0a2a20;
+
+    /* TYPOGRAFIE */
+    --font-display: 'Archivo Variable', system-ui, sans-serif;
+    --font-body: 'IBM Plex Sans Variable', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --font-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+    --stretch-display: 112%;
+
+    --text-xs: clamp(0.75rem, 0.73rem + 0.1vw, 0.8125rem);
+    --text-sm: clamp(0.875rem, 0.85rem + 0.1vw, 0.9375rem);
+    --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+    --text-lg: clamp(1.125rem, 1.05rem + 0.35vw, 1.3125rem);
+    --text-xl: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);
+    --text-2xl: clamp(1.5rem, 1.25rem + 1.1vw, 2.125rem);
+    --text-3xl: clamp(2rem, 1.4rem + 2.5vw, 3.25rem);
+    --text-4xl: clamp(2.5rem, 1.5rem + 4.4vw, 5rem);
+
+    --leading-tight: 1.1;
+    --leading-snug: 1.3;
+    --line-height-body: 1.6;
+    --measure: 62ch;
+
+    /* SPACING */
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-5: 1.25rem;
+    --space-6: 1.5rem;
+    --space-8: 2rem;
+    --space-10: 2.5rem;
+    --space-12: 3rem;
+    --space-16: 4rem;
+    --space-20: 5rem;
+    --section-space: clamp(3.5rem, 8vw, 7rem);
+
+    --radius-sm: 0.125rem;
+    --radius-md: 0.375rem;
+    --chamfer: 1.25rem;
+
+    /* LAYOUT */
+    --container-max: 72rem;
+    --container-narrow: 44rem;
+    --gutter: clamp(1rem, 4vw, 2.5rem);
+    --rail-width: 15rem;
+
+    --z-skip-link: 100;
+}
+
+/* TODO: nog te voorzien -> Handmatige themakeuze */
+:root[data-theme='light'] { color-scheme: light; }
+:root[data-theme='dark']  { color-scheme: dark; }
