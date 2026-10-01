@@ -1,0 +1,30 @@
+.hero {
+    position: relative;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-4);
+    text-align: center;
+
+    border-bottom: 2px solid white;
+}
+
+.avatar {
+    box-sizing: border-box;
+    width: clamp(120px, 20vw, 200px);
+    height: auto;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 10px solid var(--color-accent);
+}
+
+.title {
+    font-size: var(--text-3xl);
+}
+
+.role {
+    font-size: var(--text-xl);
+    color: var(--color-text-muted);
+}

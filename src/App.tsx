@@ -1,5 +1,13 @@
-function App() {
-  return <h1>Hello World</h1>
-}
+import './styles/global.css'
+import './styles/tokens.css'
 
-export default App
+import { profile } from '@/content/profile'
+import { Hero } from '@/sections/hero/Hero'
+
+export default function App() {
+  return (
+    <main>
+      <Hero profile={ profile }/>
+    </main>
+  )
+}
