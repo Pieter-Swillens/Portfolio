@@ -1,20 +1,23 @@
 import styles from './Hero.module.css'
 import { Profile } from "@/content/profile.ts";
 import { Particles } from "@/components/particles/Particles.tsx";
+import { useIsMobile } from "@/hooks/useIsMobile.ts";
 
 type HeroProps = {
   profile: Profile
 }
 
 export function Hero({ profile }: HeroProps) {
+  const isMobile = useIsMobile();
+
   return (
     <section className={ styles.hero }>
       <Particles
         color="var(--color-text)"
-        quantity={ 500 }
+        quantity={ isMobile ? 120 : 500 }
         size={ 1 }
         connected={ true }
-        connectionDistance={ 50 }
+        connectionDistance={ isMobile ? 40 : 50 }
       />
       <div className={styles.avatar_container}>
         <img
