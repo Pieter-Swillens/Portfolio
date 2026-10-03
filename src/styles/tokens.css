@@ -12,6 +12,12 @@
     --color-action-hover: color-mix(in srgb, var(--color-action), white 25%);
     --color-on-action: #0a2a20;
 
+    --color-category-core: var(--color-accent);
+    --color-category-architecture: light-dark(#2f64c4, #7fa8ff);
+    --color-category-practice: light-dark(#0e7490, #5ccfe6);
+    --color-category-workflow: light-dark(#b8325f, #f58bb0);
+    --color-category-tech: light-dark(#7440c4, #b9a0ff);
+
     /* TYPOGRAFIE */
     --font-display: 'Archivo Variable', system-ui, sans-serif;
     --font-body: 'IBM Plex Sans Variable', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
@@ -31,6 +37,9 @@
     --leading-snug: 1.3;
     --line-height-body: 1.6;
     --measure: 62ch;
+
+    /* MOTION */
+    --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
 
     /* SPACING */
     --space-1: 0.25rem;
@@ -58,6 +67,12 @@
 
     --z-skip-link: 100;
 }
+
+[data-category='core'] { --category-color: var(--color-category-core); }
+[data-category='architecture'] { --category-color: var(--color-category-architecture); }
+[data-category='practice'] { --category-color: var(--color-category-practice); }
+[data-category='workflow'] { --category-color: var(--color-category-workflow); }
+[data-category='tech'] { --category-color: var(--color-category-tech); }
 
 /* TODO: nog te voorzien -> Handmatige themakeuze */
 :root[data-theme='light'] { color-scheme: light; }

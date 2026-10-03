@@ -1,0 +1,98 @@
+.filter {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    min-inline-size: 0;
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.button {
+    --button-color: var(--category-color, var(--color-text-muted));
+
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: 0.55rem 0.9rem;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--color-surface) 78%, transparent);
+    box-shadow: 0 0.35rem 1.25rem color-mix(in srgb, var(--color-text) 5%, transparent);
+    color: var(--color-text-muted);
+    font-family: var(--font-body);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    line-height: 1.6;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+
+.button::before {
+    content: '';
+    inline-size: 0.5rem;
+    block-size: 0.5rem;
+    border-radius: 50%;
+    background: var(--button-color);
+}
+
+.button[data-category='all']::before { display: none; }
+
+.button:hover {
+    border-color: var(--button-color);
+    color: var(--color-text);
+}
+
+.button[aria-pressed='true'] {
+    border-color: var(--button-color);
+    color: var(--color-text);
+    background: color-mix(in srgb, var(--button-color) 12%, var(--color-surface));
+    box-shadow: 0 0 1.5rem color-mix(in srgb, var(--button-color) 10%, transparent);
+}
+
+.button[data-category='all'][aria-pressed='true'] {
+    border-color: transparent;
+    background: var(--color-accent);
+    color: var(--color-surface);
+    box-shadow: 0 0.5rem 1.5rem color-mix(in srgb, var(--color-accent) 18%, transparent);
+}
+
+@media (max-width: 768px) {
+    .filter {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.65rem;
+    }
+
+    .button {
+        justify-content: center;
+        min-height: 2.75rem;
+        padding-inline: 0.7rem;
+    }
+}
+
+/* Entrance: pills rise one after another once the filter is revealed. */
+@media (prefers-reduced-motion: no-preference) {
+    .filter[data-revealed='false'] .button { opacity: 0; }
+
+    .filter[data-revealed='true'] .button {
+        animation: rise 0.6s var(--ease-out) both;
+        animation-delay: calc(0.35s + var(--order, 0) * 70ms);
+    }
+
+    .button:nth-child(2) { --order: 1; }
+    .button:nth-child(3) { --order: 2; }
+    .button:nth-child(4) { --order: 3; }
+    .button:nth-child(5) { --order: 4; }
+}
+
+@keyframes rise {
+    from { opacity: 0; translate: 0 0.75rem; scale: 0.96; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .button { transition: none; }
+}

@@ -1,0 +1,111 @@
+.frame {
+    --frame-height: clamp(36rem, 78vh, 52rem);
+    --frame-radius: calc(var(--chamfer) + 0.25rem);
+    --dot-spacing: 28px;
+
+    position: relative;
+    height: var(--frame-height);
+    overflow: hidden;
+    border: 1px solid color-mix(in srgb, var(--color-border) 80%, transparent);
+    border-radius: var(--frame-radius);
+    box-shadow:
+        inset 0 1px 0 color-mix(in srgb, white 7%, transparent),
+        0 1.5rem 4rem color-mix(in srgb, var(--color-text) 6%, transparent);
+    background:
+        radial-gradient(circle, color-mix(in srgb, var(--color-text) 9%, transparent) 1px, transparent 1.5px) 0 0 / var(--dot-spacing) var(--dot-spacing),
+        radial-gradient(ellipse at 50% 45%, color-mix(in srgb, var(--color-accent) 8%, var(--color-surface)), var(--color-surface) 72%);
+}
+
+.canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    font-family: var(--font-body);
+    touch-action: pan-y;
+    user-select: none;
+}
+
+.hint {
+    position: absolute;
+    left: var(--space-4);
+    bottom: var(--space-3);
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+
+.hint[data-visible='false'] { opacity: 0; }
+
+.keyboardList {
+    position: absolute;
+    inline-size: 1px;
+    block-size: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    list-style: none;
+    white-space: nowrap;
+}
+
+.keyboardNode { font: inherit; }
+
+@media (max-width: 768px) {
+    .frame {
+        --frame-height: clamp(38rem, 125vw, 48rem);
+        --frame-radius: 1rem;
+    }
+}
+
+@media (max-width: 420px) {
+    .frame { --frame-height: 40rem; }
+}
+
+/* A light runs once around the border while the frame opens. */
+@property --sweep-angle {
+    syntax: '<angle>';
+    inherits: false;
+    initial-value: 0deg;
+}
+
+.frame::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    border-radius: inherit;
+    background: conic-gradient(from var(--sweep-angle), transparent 0 55%, var(--color-category-core) 100%);
+    mask-image: linear-gradient(#000 0 0), linear-gradient(#000 0 0);
+    mask-clip: content-box, border-box;
+    mask-composite: exclude;
+    -webkit-mask-composite: xor;
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Entrance: the frame opens from its centre, then the border light runs, then the hint fades in. */
+@media (prefers-reduced-motion: no-preference) {
+    .frame[data-revealed='false'] { opacity: 0; }
+
+    .frame[data-revealed='true'] { animation: open 1.1s var(--ease-out) 0.1s backwards; }
+    .frame[data-revealed='true']::after { animation: sweep 2.4s ease-in-out 0.4s both; }
+
+    .frame[data-revealed='false'] .hint { opacity: 0; }
+    .frame[data-revealed='true'] .hint[data-visible='true'] { transition-delay: 3s; }
+}
+
+@keyframes open {
+    from { opacity: 0; clip-path: inset(50% 50% 50% 50% round var(--frame-radius)); }
+    to { opacity: 1; clip-path: inset(-6rem round var(--frame-radius)); }
+}
+
+@keyframes sweep {
+    from { --sweep-angle: 0deg; opacity: 1; }
+    85% { opacity: 1; }
+    to { --sweep-angle: 360deg; opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hint { transition: none; }
+}

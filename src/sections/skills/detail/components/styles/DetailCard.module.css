@@ -1,0 +1,9 @@
+.title {
+    font-size: var(--text-2xl);
+    letter-spacing: -0.02em;
+}
+
+.description {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+}
