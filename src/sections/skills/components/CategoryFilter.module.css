@@ -87,6 +87,7 @@
     .button:nth-child(3) { --order: 2; }
     .button:nth-child(4) { --order: 3; }
     .button:nth-child(5) { --order: 4; }
+    .button:nth-child(6) { --order: 5; }
 }
 
 @keyframes rise {

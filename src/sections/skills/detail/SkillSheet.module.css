@@ -1,0 +1,75 @@
+.root {
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-overlay);
+    display: flex;
+    align-items: flex-end;
+}
+
+.backdrop {
+    position: absolute;
+    inset: 0;
+    padding: 0;
+    border: 0;
+    background: color-mix(in srgb, var(--color-bg) 55%, transparent);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    cursor: default;
+}
+
+.sheet {
+    --detail-accent: var(--category-color, var(--color-accent));
+
+    position: relative;
+    inset: auto;
+    inline-size: 100%;
+    max-inline-size: none;
+    margin: 0;
+    color: inherit;
+    max-block-size: min(78dvh, 34rem);
+    padding: var(--space-3) var(--space-6) max(var(--space-8), env(safe-area-inset-bottom));
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    border: 1px solid color-mix(in srgb, var(--detail-accent) 45%, var(--color-border));
+    border-bottom: 0;
+    border-radius: var(--chamfer) var(--chamfer) 0 0;
+    background: linear-gradient(180deg, color-mix(in srgb, var(--detail-accent) 11%, var(--color-surface)), var(--color-surface) 60%);
+    box-shadow: 0 -1.5rem 4rem -1.5rem var(--detail-accent);
+    outline: none;
+}
+
+.handle {
+    display: block;
+    inline-size: 2.5rem;
+    block-size: 0.25rem;
+    margin: 0 auto var(--space-4);
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--color-text) 25%, transparent);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .backdrop { animation: fade 0.3s ease backwards; }
+    .sheet { animation: sheet-up 0.45s var(--ease-out) backwards; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .root[data-closing='true'] { pointer-events: none; }
+    .root[data-closing='true'] .backdrop { animation: fade-out 0.3s ease forwards; }
+    .root[data-closing='true'] .sheet { animation: sheet-down 0.3s cubic-bezier(0.4, 0, 1, 1) forwards; }
+}
+
+@keyframes fade {
+    from { opacity: 0; }
+}
+
+@keyframes fade-out {
+    to { opacity: 0; }
+}
+
+@keyframes sheet-down {
+    to { translate: 0 100%; }
+}
+
+@keyframes sheet-up {
+    from { translate: 0 100%; }
+}

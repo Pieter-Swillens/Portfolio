@@ -7,7 +7,7 @@ import { attachPointerInput } from './pointerInput.ts'
 import { stepPhysics } from './physics.ts'
 import { drawGraph } from './render/drawGraph.ts'
 import { readTheme } from './theme.ts'
-import { animateVisualState } from './visualState.ts'
+import { animateVisualState, isInActiveCategory } from './visualState.ts'
 import type { SkillCategoryFilter } from '@/content/skills.ts'
 import type { GraphState, SkillGraphData, SkillGraphEvents } from './graph.types.ts'
 
@@ -73,8 +73,15 @@ export class SkillGraph {
 
   selectNode(key: string | null): void {
     const selected = key ? this.findNode(key) : null
+    if (selected && !isInActiveCategory(this.state, selected)) this.showAllCategories()
     this.state.interaction.selected = selected
     this.events.onSelect(selected?.id ?? null)
+  }
+
+  /** Picking a skill outside the active filter would leave it dimmed, so the filter steps aside. */
+  private showAllCategories(): void {
+    this.state.interaction.category = 'all'
+    this.events.onCategoryChange('all')
   }
 
   hoverNode(key: string | null): void {

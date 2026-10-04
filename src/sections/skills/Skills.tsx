@@ -32,8 +32,8 @@ export function Skills({ skills, relations, categories, featuredSkillKey }: Skil
       <header ref={ introRef } className={ styles.header } data-revealed={ isIntroInView }>
         <h2 id="skills-heading" className={ styles.title }>How I build software</h2>
         <p className={ styles.intro }>
-          The disciplines I rely on, and the habits that connect them. Everything in this web is linked
-          to something else, just like in a real codebase.
+          The disciplines I rely on, the habits that connect them, and what it takes to keep software
+          healthy in production. Everything in this web is linked to something else, just like in a real system.
         </p>
       </header>
 

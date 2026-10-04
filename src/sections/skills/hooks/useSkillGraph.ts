@@ -21,6 +21,7 @@ export function useSkillGraph({ skills, relations }: SkillGraphData, isRevealed:
 
     const graph = SkillGraph.create(canvas, { skills, relations }, {
       onSelect: setSelectedKey,
+      onCategoryChange: setCategory,
       onInteract: () => setHintVisible(false),
     })
     if (!graph) return

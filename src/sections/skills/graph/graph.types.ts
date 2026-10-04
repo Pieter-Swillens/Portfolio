@@ -11,6 +11,8 @@ export type SkillGraphData = {
 /** Callbacks through which the graph reports back to the UI around it. */
 export type SkillGraphEvents = {
   onSelect: (skillKey: string | null) => void
+  /** Fired when the graph changes the category filter by itself, e.g. after selecting a skill outside it. */
+  onCategoryChange: (category: SkillCategoryFilter) => void
   /** Fired when the visitor grabs a node, e.g. to hide the "drag a node" hint. */
   onInteract: () => void
 }

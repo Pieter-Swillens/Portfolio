@@ -1,4 +1,4 @@
-export type SkillCategory = 'core' | 'architecture' | 'practice' | 'workflow' | 'tech'
+export type SkillCategory = 'core' | 'architecture' | 'practice' | 'workflow' | 'platform' | 'tech'
 
 /** `core` is the centre of the web: it opens a card, but you cannot filter on it. */
 export type FilterableSkillCategory = Exclude<SkillCategory, 'core'>
@@ -24,6 +24,7 @@ const categoryLabels: Record<SkillCategory, string> = {
   architecture: 'Architecture',
   practice: 'Practice',
   workflow: 'Way of working',
+  platform: 'Platform & operations',
   tech: 'Technology',
 }
 
@@ -54,6 +55,11 @@ const definitions = {
     label: 'Event Sourcing',
     category: 'architecture',
     description: 'Storing state as an append-only log of domain events instead of the current snapshot. Gives a full audit trail, point-in-time queries and the ability to rebuild projections.',
+  },
+  'event-driven': {
+    label: 'Event-Driven Architecture',
+    category: 'architecture',
+    description: 'Services that communicate by publishing and reacting to events instead of calling each other directly. Keeps them loosely coupled and lets the system scale and evolve one part at a time.',
   },
   tdd: {
     label: 'Test-Driven Development',
@@ -105,6 +111,21 @@ const definitions = {
     category: 'workflow',
     description: 'Integrating into the main branch many times a day, with a green build as the team’s shared heartbeat. Small, frequent merges surface problems within minutes instead of weeks.',
   },
+  observability: {
+    label: 'Observability',
+    category: 'platform',
+    description: 'Making a running system explain itself through metrics, logs and traces, dashboards and alerts. Problems are found with data instead of guesswork, ideally before the users notice.',
+  },
+  containerisation: {
+    label: 'Containerisation',
+    category: 'platform',
+    description: 'Packaging an application together with its runtime, so it behaves the same on a laptop, in the pipeline and in production. Removes "works on my machine" from the conversation.',
+  },
+  orchestration: {
+    label: 'Orchestration',
+    category: 'platform',
+    description: 'Scheduling, scaling and healing containers across a cluster. Enables rolling deployments, automatic restarts and capacity that follows the load.',
+  },
   spring: {
     label: 'Spring Framework',
     category: 'tech',
@@ -114,6 +135,36 @@ const definitions = {
     label: 'Kotlin',
     category: 'tech',
     description: 'Concise, modern JVM language with null safety in the type system, extension functions, coroutines and seamless Java interop. First-class support in Spring.',
+  },
+  typescript: {
+    label: 'TypeScript',
+    category: 'tech',
+    description: 'JavaScript with a type system that catches mistakes while typing instead of in production. Used for frontends and tooling, including this portfolio.',
+  },
+  postgresql: {
+    label: 'PostgreSQL',
+    category: 'tech',
+    description: 'Dependable open-source relational database with strong consistency, rich SQL and JSON support. A solid default for transactional data and event stores.',
+  },
+  rabbitmq: {
+    label: 'RabbitMQ',
+    category: 'tech',
+    description: 'Message broker for asynchronous communication between services: queues, exchanges and routing, with acknowledgements and retries for reliable delivery.',
+  },
+  docker: {
+    label: 'Docker',
+    category: 'tech',
+    description: 'Builds and runs containers. Reproducible images for local development, CI and deployment.',
+  },
+  kubernetes: {
+    label: 'Kubernetes',
+    category: 'tech',
+    description: 'The standard platform for running containers at scale: declarative deployments, services, autoscaling and self-healing.',
+  },
+  grafana: {
+    label: 'Grafana',
+    category: 'tech',
+    description: 'Dashboards and alerting on top of metrics, logs and traces. Turns raw telemetry into something a team can act on.',
   },
 } satisfies Record<string, SkillDefinition>
 
@@ -139,9 +190,12 @@ export const relations: SkillRelation[] = [
   link('engineering', 'xp'),
   link('engineering', 'testing'),
   link('engineering', 'refactoring'),
+  link('engineering', 'observability'),
 
   // Architecture and design
   link('ddd', 'event-sourcing'),
+  link('ddd', 'event-driven'),
+  link('event-driven', 'event-sourcing'),
   link('ddd', 'hexagonal'),
   link('clean', 'hexagonal'),
   link('clean', 'solid'),
@@ -167,10 +221,26 @@ export const relations: SkillRelation[] = [
   link('ci', 'small-steps'),
   link('ci', 'feedback'),
 
+  // Platform and operations
+  link('observability', 'feedback'),
+  link('observability', 'orchestration'),
+  link('containerisation', 'orchestration'),
+  link('containerisation', 'ci'),
+
   // Technology
   link('spring', 'clean'),
   link('spring', 'hexagonal'),
   link('kotlin', 'spring'),
+  link('typescript', 'clean'),
+  link('typescript', 'testing'),
+  link('postgresql', 'spring'),
+  link('postgresql', 'event-sourcing'),
+  link('rabbitmq', 'event-driven'),
+  link('rabbitmq', 'spring'),
+  link('docker', 'containerisation'),
+  link('kubernetes', 'orchestration'),
+  link('kubernetes', 'docker'),
+  link('grafana', 'observability'),
 ]
 
 export const skillCategories: Record<SkillCategoryFilter, { label: string }> = {
@@ -178,5 +248,6 @@ export const skillCategories: Record<SkillCategoryFilter, { label: string }> = {
   architecture: { label: categoryLabels.architecture },
   practice: { label: categoryLabels.practice },
   workflow: { label: categoryLabels.workflow },
+  platform: { label: 'Platform' },
   tech: { label: categoryLabels.tech },
 }

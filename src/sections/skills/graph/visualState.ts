@@ -2,9 +2,12 @@ import { CENTRE_CATEGORY, DIM, ENTRANCE, HIGHLIGHT } from './graph.config.ts'
 import { approach, clamp } from './canvasMath.ts'
 import type { GraphNode, GraphState } from './graph.types.ts'
 
-/** The node that the visitor is currently looking at: selected wins over hovered. */
+/**
+ * The node that the visitor is currently looking at: hovered wins over selected.
+ * Hovering previews how another node connects, and the selection comes back once the pointer leaves.
+ */
 export const focusedNode = ({ interaction }: GraphState): GraphNode | null =>
-  interaction.selected ?? interaction.hovered
+  interaction.hovered ?? interaction.selected
 
 /** Is this node shown for the active category filter? The core node is always shown. */
 export const isInActiveCategory = ({ interaction }: GraphState, node: GraphNode) =>
@@ -33,6 +36,7 @@ export function animateVisualState(state: GraphState, dt: number): void {
 
 function dimTarget(state: GraphState, node: GraphNode, focus: GraphNode | null): number {
   if (!isInActiveCategory(state, node)) return 1
+  if (node === state.interaction.selected) return 0 // the selection stays readable while previewing another node
   if (focus && !isRelatedTo(state, focus, node)) return DIM.unrelatedToFocus
   return 0
 }

@@ -8,6 +8,7 @@ export const FALLBACK_THEME: GraphTheme = {
     architecture: [127, 168, 255],
     practice: [92, 207, 230],
     workflow: [245, 139, 176],
+    platform: [125, 223, 143],
     tech: [185, 160, 255],
   },
   text: [232, 242, 236],

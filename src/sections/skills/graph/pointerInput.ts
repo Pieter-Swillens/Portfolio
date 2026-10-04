@@ -1,5 +1,4 @@
 import { NODE, POINTER } from './graph.config.ts'
-import { isInActiveCategory } from './visualState.ts'
 import type { GraphNode, GraphState } from './graph.types.ts'
 
 type Point = { x: number; y: number }
@@ -105,12 +104,12 @@ export function attachPointerInput(
   return () => listeners.forEach(([type, listener]) => canvas.removeEventListener(type, listener))
 }
 
-/** Topmost node under the point. Unborn and filtered-out nodes cannot be hit. */
+/** Topmost node under the point. Unborn nodes cannot be hit; nodes outside the active filter can, so you can jump to them. */
 function findNodeAt(state: GraphState, point: Point): GraphNode | null {
   const { nodes } = state.scene
   for (let i = nodes.length - 1; i >= 0; i--) {
     const node = nodes[i]
-    if (node.appear <= 0.5 || !isInActiveCategory(state, node)) continue
+    if (node.appear <= 0.5) continue
 
     const reachX = node.width / 2 + NODE.hitPadding
     const reachY = node.height / 2 + NODE.hitPadding
