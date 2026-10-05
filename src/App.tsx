@@ -1,6 +1,7 @@
 import { useMemo } from 'react'
 import './styles/global.css'
 import './styles/tokens.css'
+import './styles/motion.css'
 
 import { profile } from '@/content/profile'
 import { projects } from '@/content/projects'

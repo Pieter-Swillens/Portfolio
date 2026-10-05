@@ -36,7 +36,7 @@
     font-size: 1.1rem;
     line-height: 1;
     cursor: pointer;
-    transition: color 0.15s ease, border-color 0.15s ease;
+    transition: color var(--motion-fast) ease, border-color var(--motion-fast) ease;
 }
 
 .clear:hover {
@@ -75,10 +75,10 @@
 
 /* The category dot pings once, and the connected skills pop in one by one. */
 @media (prefers-reduced-motion: no-preference) {
-    .category::before { animation: ping 1.2s var(--ease-out) 0.2s; }
+    .category::before { animation: var(--motion-ping-name) 1.2s var(--ease-out) 0.2s; }
 
     .links li {
-        animation: pop 0.5s var(--ease-out) backwards;
+        animation: var(--motion-pop-name) 0.5s var(--ease-out) backwards;
         animation-delay: calc(0.35s + var(--order, 0) * 45ms);
     }
 
@@ -90,15 +90,6 @@
     .links li:nth-child(7) { --order: 6; }
     .links li:nth-child(8) { --order: 7; }
     .links li:nth-child(n + 9) { --order: 8; }
-}
-
-@keyframes ping {
-    from { box-shadow: 0 0 0 0 color-mix(in srgb, var(--detail-accent) 70%, transparent), 0 0 0.6rem var(--detail-accent); }
-    to { box-shadow: 0 0 0 0.8rem transparent, 0 0 0.6rem var(--detail-accent); }
-}
-
-@keyframes pop {
-    from { opacity: 0; scale: 0.7; translate: 0 0.4rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {

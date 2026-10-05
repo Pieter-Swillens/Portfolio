@@ -1,0 +1,224 @@
+:root {
+    --motion-ease-standard: cubic-bezier(0.22, 1, 0.36, 1);
+    --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+    --motion-fast: 0.15s;
+    --motion-standard: 0.2s;
+    --motion-medium: 0.3s;
+    --motion-slow: 0.4s;
+    --motion-reveal: 0.7s;
+    --motion-ease: var(--ease-out);
+
+
+    --motion-rise-name: motion-rise;
+    --motion-wipe-name: motion-wipe;
+    --motion-draw-line-name: motion-draw-line;
+    --motion-enter-name: motion-enter;
+    --motion-fade-name: motion-fade;
+    --motion-fade-out-name: motion-fade-out;
+    --motion-slide-up-name: motion-slide-up;
+    --motion-slide-down-name: motion-slide-down;
+    --motion-open-name: motion-open;
+    --motion-sweep-name: motion-sweep;
+    --motion-beam-name: motion-beam;
+    --motion-ping-name: motion-ping;
+    --motion-pop-name: motion-pop;
+
+    --motion-avatar-enter-name: motion-avatar-enter;
+    --motion-fade-up-name: motion-fade-up;
+    --motion-slide-left-name: motion-slide-left;
+    --motion-slide-right-name: motion-slide-right;
+    --motion-line-grow-name: motion-line-grow;
+    --motion-gradient-name: motion-gradient;
+    --motion-glow-in-name: motion-glow-in;
+    --motion-glow-breath-name: motion-glow-breath;
+}
+
+@keyframes motion-rise {
+    from {
+        opacity: 0;
+        translate: 0 var(--motion-rise-y, 1rem);
+        scale: var(--motion-rise-scale, 1);
+        filter: blur(var(--motion-rise-blur, 0));
+    }
+}
+
+@keyframes motion-wipe {
+    from {
+        clip-path: inset(-10% 100% -10% 0);
+        translate: 0 var(--motion-wipe-shift, 0.35em);
+    }
+
+    to {
+        clip-path: inset(-10% -2% -10% 0);
+    }
+}
+
+@keyframes motion-draw-line {
+    from { transform: scaleX(0); }
+}
+
+@keyframes motion-enter {
+    from {
+        opacity: 0;
+        translate: var(--motion-enter-x, 0) var(--motion-enter-y, 1rem);
+    }
+}
+
+@keyframes motion-fade {
+    from { opacity: 0; }
+}
+
+@keyframes motion-fade-out {
+    to { opacity: 0; }
+}
+
+@keyframes motion-slide-up {
+    from { translate: 0 100%; }
+}
+
+@keyframes motion-slide-down {
+    to { translate: 0 100%; }
+}
+
+@keyframes motion-open {
+    from {
+        opacity: 0;
+        clip-path: inset(50% 50% 50% 50% round var(--frame-radius));
+    }
+
+    to {
+        opacity: 1;
+        clip-path: inset(-6rem round var(--frame-radius));
+    }
+}
+
+@keyframes motion-sweep {
+    from {
+        --sweep-angle: 0deg;
+        opacity: 1;
+    }
+
+    85% { opacity: 1; }
+
+    to {
+        --sweep-angle: 360deg;
+        opacity: 0;
+    }
+}
+
+@keyframes motion-beam {
+    from {
+        top: 0;
+        opacity: 0.9;
+    }
+
+    to {
+        top: 100%;
+        opacity: 0;
+    }
+}
+
+@keyframes motion-ping {
+    from {
+        box-shadow:
+            0 0 0 0 color-mix(in srgb, var(--detail-accent) 70%, transparent),
+            0 0 0.6rem var(--detail-accent);
+    }
+
+    to {
+        box-shadow:
+            0 0 0 0.8rem transparent,
+            0 0 0.6rem var(--detail-accent);
+    }
+}
+
+@keyframes motion-pop {
+    from {
+        opacity: 0;
+        scale: 0.7;
+        translate: 0 0.4rem;
+    }
+}
+
+@keyframes motion-avatar-enter {
+    from {
+        opacity: 0;
+        transform: translateX(2rem) translateY(1.5rem);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0) translateY(0);
+    }
+}
+
+@keyframes motion-fade-up {
+    from {
+        opacity: 0;
+        transform: translateY(1.25rem);
+    }
+
+    to {
+        opacity: 0.6;
+        transform: translateY(0);
+    }
+}
+
+@keyframes motion-slide-left {
+    from {
+        opacity: 0;
+        transform: translateX(-2rem);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes motion-slide-right {
+    from {
+        opacity: 0;
+        transform: translateX(2rem);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes motion-line-grow {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+}
+
+@keyframes motion-gradient {
+    0% { background-position: 0 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0 50%; }
+}
+
+@keyframes motion-glow-in {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.6);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+@keyframes motion-glow-breath {
+    0%, 100% {
+        opacity: 0.7;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.08);
+    }
+}

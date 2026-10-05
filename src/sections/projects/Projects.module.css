@@ -2,10 +2,10 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    gap: clamp(2rem, 3.5vw, 3rem);
+    gap: var(--section-gap);
     width: min(100%, 110rem);
     margin-inline: auto;
-    padding: clamp(5rem, 9vw, 8rem) clamp(1rem, 3vw, 2.5rem);
+    padding: var(--section-padding-block) var(--section-gutter);
 }
 
 .cards {

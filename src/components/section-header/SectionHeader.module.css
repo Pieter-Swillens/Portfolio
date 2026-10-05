@@ -14,7 +14,7 @@
     max-width: 58ch;
     color: var(--color-text-muted);
     font-size: var(--text-lg);
-    line-height: 1.55;
+    line-height: var(--leading-intro);
 }
 
 .header::after {
@@ -35,20 +35,8 @@
 @media (prefers-reduced-motion: no-preference) {
     .header[data-revealed='false'] > * { opacity: 0; }
 
-    .header[data-revealed='true'] .title { animation: wipe 1s var(--ease-out) both; }
-    .header[data-revealed='true'] .intro { animation: rise 0.9s var(--ease-out) 0.2s both; }
-    .header[data-revealed='true']::after { animation: draw-line 0.9s var(--ease-out) 0.45s both; }
+    .header[data-revealed='true'] .title { animation: var(--motion-wipe-name) 1s var(--ease-out) both; }
+    .header[data-revealed='true'] .intro { animation: var(--motion-rise-name) 0.9s var(--ease-out) 0.2s both; }
+    .header[data-revealed='true']::after { animation: var(--motion-draw-line-name) 0.9s var(--ease-out) 0.45s both; }
 }
 
-@keyframes wipe {
-    from { clip-path: inset(-10% 100% -10% 0); translate: 0 0.35em; }
-    to { clip-path: inset(-10% -2% -10% 0); }
-}
-
-@keyframes rise {
-    from { opacity: 0; translate: 0 1rem; }
-}
-
-@keyframes draw-line {
-    from { transform: scaleX(0); }
-}

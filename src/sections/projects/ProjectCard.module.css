@@ -1,4 +1,5 @@
 .card {
+    --motion-enter-y: 2rem;
     --card-accent: var(--color-accent);
 
     position: relative;
@@ -77,7 +78,7 @@
     margin-top: var(--space-2);
     color: var(--color-text-muted);
     font-size: var(--text-sm);
-    line-height: 1.6;
+    line-height: var(--leading-copy);
 }
 
 
@@ -106,7 +107,7 @@
     font-size: var(--text-sm);
     font-weight: 600;
     text-decoration: none;
-    transition: border-color 0.2s ease, background 0.2s ease;
+    transition: border-color var(--motion-standard) var(--motion-ease-standard), background var(--motion-standard) var(--motion-ease-standard);
 }
 
 .link:hover {
@@ -137,11 +138,7 @@
 
 @media (prefers-reduced-motion: no-preference) {
     .card[data-revealed='false'] { opacity: 0; translate: 0 2rem; }
-    .card[data-revealed='true'] { animation: card-in 0.9s var(--ease-out) both; }
-}
-
-@keyframes card-in {
-    from { opacity: 0; translate: 0 2rem; }
+    .card[data-revealed='true'] { animation: var(--motion-enter-name) 0.9s var(--ease-out) both; }
 }
 
 @media (prefers-reduced-motion: reduce) {

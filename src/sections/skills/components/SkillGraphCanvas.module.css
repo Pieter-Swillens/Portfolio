@@ -32,7 +32,7 @@
     font-size: var(--text-xs);
     color: var(--color-text-muted);
     pointer-events: none;
-    transition: opacity 0.4s ease;
+    transition: opacity var(--motion-slow) ease;
 }
 
 .hint[data-visible='false'] { opacity: 0; }
@@ -88,22 +88,11 @@
 @media (prefers-reduced-motion: no-preference) {
     .frame[data-revealed='false'] { opacity: 0; }
 
-    .frame[data-revealed='true'] { animation: open 1.1s var(--ease-out) 0.1s backwards; }
-    .frame[data-revealed='true']::after { animation: sweep 2.4s ease-in-out 0.4s both; }
+    .frame[data-revealed='true'] { animation: var(--motion-open-name) 1.1s var(--ease-out) 0.1s backwards; }
+    .frame[data-revealed='true']::after { animation: var(--motion-sweep-name) 2.4s ease-in-out 0.4s both; }
 
     .frame[data-revealed='false'] .hint { opacity: 0; }
     .frame[data-revealed='true'] .hint[data-visible='true'] { transition-delay: 3s; }
-}
-
-@keyframes open {
-    from { opacity: 0; clip-path: inset(50% 50% 50% 50% round var(--frame-radius)); }
-    to { opacity: 1; clip-path: inset(-6rem round var(--frame-radius)); }
-}
-
-@keyframes sweep {
-    from { --sweep-angle: 0deg; opacity: 1; }
-    85% { opacity: 1; }
-    to { --sweep-angle: 360deg; opacity: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {
