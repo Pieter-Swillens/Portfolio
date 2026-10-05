@@ -3,9 +3,11 @@ import './styles/global.css'
 import './styles/tokens.css'
 
 import { profile } from '@/content/profile'
+import { projects } from '@/content/projects'
 import { featuredSkill, relations, skillCategories, skills } from '@/content/skills'
 import { Hero } from '@/sections/hero/Hero'
 import { Skills } from '@/sections/skills/Skills'
+import { Projects } from '@/sections/projects/Projects'
 import { useIsMobile } from "@/hooks/useIsMobile.ts";
 
 export default function App() {
@@ -24,6 +26,7 @@ export default function App() {
         categories={ skillCategories }
         featuredSkillKey={ featuredSkill }
       />
+      <Projects projects={ projects } />
     </main>
   )
 }
