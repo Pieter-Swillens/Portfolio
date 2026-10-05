@@ -8,4 +8,5 @@ export type ParticlesConfig = {
 export type HeroProps = {
   profile: Profile,
   particlesConfig: ParticlesConfig,
+  sectionId: string
 }

@@ -4,7 +4,8 @@ import type { SkillGraphData } from './graph/graph.types.ts'
 
 export type SkillsProps = SkillGraphData & {
   categories: Readonly<Record<SkillCategoryFilter, { label: string }>>
-  featuredSkillKey: string
+  featuredSkillKey: string,
+  sectionId: string
 }
 
 export type SelectedSkill = Skill & { key: string }

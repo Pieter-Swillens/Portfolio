@@ -8,7 +8,7 @@ import { findConnectedSkills, findSelectedSkill } from './skillSelectors.ts'
 import type { SkillsProps } from './Skills.types.ts'
 import styles from './Skills.module.css'
 
-export function Skills({ skills, relations, categories, featuredSkillKey }: SkillsProps) {
+export function Skills({ skills, relations, categories, featuredSkillKey, sectionId }: SkillsProps) {
   // Two triggers: the title and filter animate when the section starts, the graph when it is itself in view.
   const [introRef, isIntroInView] = useInView<HTMLElement>({ rootMargin: '0px 0px -12% 0px' })
   const [explorerRef, isExplorerInView] = useInView<HTMLDivElement>({ rootMargin: '0px 0px -20% 0px' })
@@ -28,7 +28,7 @@ export function Skills({ skills, relations, categories, featuredSkillKey }: Skil
   const startWithFeaturedSkill = useCallback(() => selectSkill(featuredSkillKey), [selectSkill, featuredSkillKey])
 
   return (
-    <section className={ styles.skills } aria-labelledby="skills-heading">
+    <section id={ sectionId } className={ styles.skills } aria-labelledby="skills-heading">
       <header ref={ introRef } className={ styles.header } data-revealed={ isIntroInView }>
         <h2 id="skills-heading" className={ styles.title }>How I build software</h2>
         <p className={ styles.intro }>

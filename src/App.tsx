@@ -10,6 +10,8 @@ import { Hero } from '@/sections/hero/Hero'
 import { Skills } from '@/sections/skills/Skills'
 import { Projects } from '@/sections/projects/Projects'
 import { useIsMobile } from "@/hooks/useIsMobile.ts";
+import { Navigation } from "@/sections/navigation/Navigation.tsx";
+import { navLinks, sectionIds } from "@/content/navigation.ts";
 
 export default function App() {
   const isMobile = useIsMobile();
@@ -19,15 +21,14 @@ export default function App() {
     : { quantity: 500, connectionDistance: 50 }, [isMobile])
 
   return (
-    <main>
-      <Hero profile={ profile } particlesConfig={ particlesConfig } />
-      <Skills
-        skills={ skills }
-        relations={ relations }
-        categories={ skillCategories }
-        featuredSkillKey={ featuredSkill }
-      />
-      <Projects projects={ projects } />
-    </main>
+    <>
+      <Navigation links={ navLinks }/>
+      <main>
+        <Hero sectionId={ sectionIds.top } profile={ profile } particlesConfig={ particlesConfig }/>
+        <Skills sectionId={ sectionIds.skills } skills={ skills } relations={ relations } categories={ skillCategories }
+                featuredSkillKey={ featuredSkill }/>
+        <Projects sectionId={ sectionIds.projects } projects={ projects }/>
+      </main>
+    </>
   )
 }

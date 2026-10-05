@@ -3,9 +3,9 @@ import { Particles } from "@/components/particles/Particles.tsx";
 import { HeroProps } from "@/sections/hero/Hero.types.ts";
 
 
-export function Hero({ profile, particlesConfig }: HeroProps) {
+export function Hero({ profile, particlesConfig, sectionId }: HeroProps) {
   return (
-    <section className={ styles.hero }>
+    <section id={ sectionId } className={ styles.hero }>
       <Particles
         color="var(--color-text)"
         quantity={ particlesConfig.quantity }
