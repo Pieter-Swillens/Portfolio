@@ -7,6 +7,7 @@ import { useSkillGraph } from './hooks/useSkillGraph.ts'
 import { findConnectedSkills, findSelectedSkill } from './skillSelectors.ts'
 import type { SkillsProps } from './Skills.types.ts'
 import styles from './Skills.module.css'
+import { SectionHeader } from "@/components/section-header/SectionHeader.tsx";
 
 export function Skills({ skills, relations, categories, featuredSkillKey, sectionId }: SkillsProps) {
   // Two triggers: the title and filter animate when the section starts, the graph when it is itself in view.
@@ -29,13 +30,14 @@ export function Skills({ skills, relations, categories, featuredSkillKey, sectio
 
   return (
     <section id={ sectionId } className={ styles.skills } aria-labelledby="skills-heading">
-      <header ref={ introRef } className={ styles.header } data-revealed={ isIntroInView }>
-        <h2 id="skills-heading" className={ styles.title }>How I build software</h2>
-        <p className={ styles.intro }>
-          The disciplines I rely on, the habits that connect them, and what it takes to keep software
-          healthy in production. Everything in this web is linked to something else, just like in a real system.
-        </p>
-      </header>
+      <SectionHeader
+        ref={ introRef }
+        id="skills-heading"
+        title="How I build software"
+        intro="The disciplines I rely on, the habits that connect them, and what it takes to keep software
+          healthy in production. Everything in this web is linked to something else, just like in a real system."
+        isRevealed={ isIntroInView }
+      />
 
       <CategoryFilter
         categories={ categories }
