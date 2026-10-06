@@ -60,7 +60,6 @@ export function SkillDetail({
       aria-live="polite"
       aria-label="Skill details"
     >
-      {/* The key restarts the content animation every time another skill is shown. */}
       <div key={ skill?.key ?? 'intro' } className={ styles.content }>
         { skill ? (
           <SkillSelectedDetailCard

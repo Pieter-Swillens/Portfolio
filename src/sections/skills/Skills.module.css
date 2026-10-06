@@ -1,45 +1,3 @@
-.skills {
-    --detail-width: 22rem;
-
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: var(--section-gap);
-    width: min(100%, 110rem);
-    margin-inline: auto;
-    padding: var(--section-padding-block) var(--section-gutter);
-}
-
-.header {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-3);
-}
-
-.title {
-    font-size: var(--text-3xl);
-    font-weight: 900;
-    letter-spacing: -0.03em;
-}
-
-.intro {
-    max-width: 58ch;
-    color: var(--color-text-muted);
-    font-size: var(--text-lg);
-    line-height: var(--leading-intro);
-}
-
-/* Small accent line under the intro, drawn in during the entrance */
-.header::after {
-    content: '';
-    inline-size: 4rem;
-    block-size: 2px;
-    margin-top: var(--space-2);
-    background: var(--color-accent);
-    transform-origin: left;
-}
-
-/* Graph on the left, detail card on the right (below it on small screens). */
 .layout {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
@@ -48,26 +6,5 @@
 }
 
 @media (min-width: 64rem) {
-    .layout { grid-template-columns: minmax(0, 1fr) var(--detail-width); }
+    .layout { grid-template-columns: minmax(0, 1fr) 22rem; }
 }
-
-@media (max-width: 768px) {
-    .skills {
-        --section-gap: 2.25rem;
-        padding-block: 4.5rem 5rem;
-    }
-
-    .header { gap: var(--space-4); }
-    .title { max-width: 12ch; }
-    .intro { font-size: var(--text-base); }
-}
-
-/* Entrance: title wipes in, intro rises, the line draws. Hidden until the header scrolls into view. */
-@media (prefers-reduced-motion: no-preference) {
-    .header[data-revealed='false'] > * { opacity: 0; }
-
-    .header[data-revealed='true'] .title { animation: var(--motion-wipe-name) 1s var(--ease-out) both; }
-    .header[data-revealed='true'] .intro { animation: var(--motion-rise-name) 0.9s var(--ease-out) 0.2s both; }
-    .header[data-revealed='true']::after { animation: var(--motion-draw-line-name) 0.9s var(--ease-out) 0.45s both; }
-}
-

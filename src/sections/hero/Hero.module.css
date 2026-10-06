@@ -98,7 +98,7 @@
     background-size: 200% 100%;
     background-clip: text;
     -webkit-background-clip: text;
-    animation: var(--motion-gradient-name) 5s ease infinite, slideFromRight 0.9s var(--hero-ease) 0.65s both;
+    animation: var(--motion-gradient-name) 5s ease infinite, var(--motion-slide-right-name) 0.9s var(--hero-ease) 0.65s both;
 }
 
 .content_container__titleAccent::after {

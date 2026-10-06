@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import { SkillDetail } from './detail/SkillDetail.tsx'
 import { CategoryFilter } from './components/CategoryFilter.tsx'
 import { SkillGraphCanvas } from './components/SkillGraphCanvas.tsx'
@@ -7,12 +7,16 @@ import { useSkillGraph } from './hooks/useSkillGraph.ts'
 import { findConnectedSkills, findSelectedSkill } from './skillSelectors.ts'
 import type { SkillsProps } from './Skills.types.ts'
 import styles from './Skills.module.css'
-import { SectionHeader } from "@/components/section-header/SectionHeader.tsx";
+import { PortfolioSection } from "@/components/section/PortfolioSection.tsx";
+
+const sectionHeaderInfo = {
+  title: "How I build software",
+  intro: "The disciplines I rely on, the habits that connect them, and what it takes to keep software healthy in production. Everything in this web is linked to something else, just like in a real system."
+}
 
 export function Skills({ skills, relations, categories, featuredSkillKey, sectionId }: SkillsProps) {
-  // Two triggers: the title and filter animate when the section starts, the graph when it is itself in view.
-  const [introRef, isIntroInView] = useInView<HTMLElement>({ rootMargin: '0px 0px -12% 0px' })
   const [explorerRef, isExplorerInView] = useInView<HTMLDivElement>({ rootMargin: '0px 0px -20% 0px' })
+  const [isIntroInView, setIsIntroInView] = useState(false)
 
   const graph = useSkillGraph({ skills, relations }, isExplorerInView)
 
@@ -26,19 +30,16 @@ export function Skills({ skills, relations, categories, featuredSkillKey, sectio
   )
 
   const { selectSkill } = graph
-  const startWithFeaturedSkill = useCallback(() => selectSkill(featuredSkillKey), [selectSkill, featuredSkillKey])
+  const startWithFeaturedSkill = useCallback(
+    () => selectSkill(featuredSkillKey), [selectSkill, featuredSkillKey]
+  )
 
   return (
-    <section id={ sectionId } className={ styles.skills } aria-labelledby="skills-heading">
-      <SectionHeader
-        ref={ introRef }
-        id="skills-heading"
-        title="How I build software"
-        intro="The disciplines I rely on, the habits that connect them, and what it takes to keep software
-          healthy in production. Everything in this web is linked to something else, just like in a real system."
-        isRevealed={ isIntroInView }
-      />
-
+    <PortfolioSection
+      anchorId={ sectionId }
+      sectionHeaderInfo={ sectionHeaderInfo }
+      onIntroInView={ setIsIntroInView }
+    >
       <CategoryFilter
         categories={ categories }
         activeCategory={ graph.category }
@@ -66,6 +67,6 @@ export function Skills({ skills, relations, categories, featuredSkillKey, sectio
           onClear={ graph.clearSelection }
         />
       </div>
-    </section>
+    </PortfolioSection>
   )
 }
